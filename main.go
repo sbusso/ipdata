@@ -1,9 +1,9 @@
-package main /* import "s32x.com/ipdata" */
+package main
 
 import (
 	"os"
 
-	"s32x.com/ipdata/api"
+	"github.com/sbusso/ipdata/api"
 )
 
 func main() { api.Start(getenv("PORT", "8080")) }

@@ -1,4 +1,4 @@
-package api /* import "s32x.com/ipdata/api" */
+package api
 
 import (
 	"log"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"s32x.com/ipdata/ipdata"
+	"github.com/sbusso/ipdata/ipdata"
 )
 
 // Start starts the ipdata API service using the passed params
@@ -26,12 +26,12 @@ func Start(port string) {
 	e.Use(middleware.CORS())
 
 	// Bind all API endpoint handlers
-	e.GET("/", func(c echo.Context) error {
-		return c.Redirect(http.StatusTemporaryRedirect,
-			"https://s32x.com/ipdata")
-	})
 	e.GET("/lookup/:ip", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, ic.Lookup(c.Param("ip")))
+	})
+
+	e.GET("/continent/:ip", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, ic.Continent(c.Param("ip")))
 	})
 
 	// Listen on the passed port
